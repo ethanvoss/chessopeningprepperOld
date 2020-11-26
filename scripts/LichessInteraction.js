@@ -44,5 +44,5 @@ function disectPgn(data, user)
     }
     
   }
-  games = initializeGames(tempGames);
+  initializeGames(tempGames);
 }

@@ -2,7 +2,19 @@ document.getElementById('submit').addEventListener('click', function(){
 	var user = document.getElementById('input').value;
 	var type = document.getElementById('types').value;
 	side = document.getElementById('side').value;
+	oppSide = "black";
+	if(side == "black") oppSide = "white";
 
+	//initialize board
+    var config = 
+      {
+        draggable: true,
+        dropOffBoard: 'snapback', 
+        position: 'start',
+        orientation: side
+      }
+
+    board = Chessboard('board', config);
 
 	fetchFromLichess(user,type);
 
@@ -17,4 +29,5 @@ document.getElementById('submit').addEventListener('click', function(){
 	status.textContent = "Loading " + user + "'s games";
 	loadingStatus.appendChild(status);
 
-})
+});
+

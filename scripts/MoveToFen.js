@@ -1,9 +1,14 @@
+//doesnt support castling and breaks on cases where two of the same piece can move to a square
+
+
 const cConvert = ["a","b","c","d","e","f","g","h"];
 
-function moveToFen(fen, move)
+function moveToFen(fenIn, move)
 {	
 	//convert move to fen then return that fen
-
+	console.log(fenIn);
+	console.log(move);
+	var fen = stringToFen(fenIn);
 	var fenOut = fen;
 	var positions = move.split('-');
 	
@@ -33,16 +38,28 @@ function moveToFen(fen, move)
 		}
 		c = parseInt(c);
 	fenOut[r][c] = piece;
-	return fenOut;
+	return fenToString(fenOut);
 }
 
-function expandMove(fen, move, side)
+function expandMove(fenIn, move, side)
 {
+	
+	var fen = stringToFen(fenIn);
 	var moveInArr = move.split('');
 	const WhitePieces = ["K", "Q", "R", "B", "N", "P"];
 	const BlackPieces = ["k", "q", "r", "b", "n", "p"];
+	//remove check tags
+	if(moveInArr[moveInArr.length-1] == "+" || moveInArr[moveInArr.length-1] == "#")
+	{
+		moveInArr.pop();
+	}
 
+	if(move == "0-1" || move == "1-0" || move == "1/2-1/2") return "err";
+	
+	//land of im not dealing with that
+	if(moveInArr[0] == "O") return "err"; //end game on castles
 
+	if(moveInArr[moveInArr.length-2] == "=") return "err"; //ends game if a pawn promotion occurs
 	//Find Piece
 	var piece;
 	var pieceNum;
@@ -107,7 +124,11 @@ function expandMove(fen, move, side)
 						}
 					c = parseInt(c);
 					var r = parseInt(moveInArr[1]) - (1 * mult);
-					if(fen[r][c] == piece) // piece found 1 space behind
+
+					console.log(move);
+					console.log("r:" + r + " c:" + c);
+
+					if(fen[r - 1][c] == piece) // piece found 1 space behind
 						{
 							oldPos = cConvert[c] + r.toString();
 						}
@@ -159,7 +180,6 @@ function expandMove(fen, move, side)
 
 					if(lookingAt == piece) //piece found 
 						{
-							console.log("piece found at " + c + "," + r);
 							found = true;
 							break;
 						}
@@ -180,13 +200,11 @@ function expandMove(fen, move, side)
 		}//end of for loop
 		if(!found)
 			{
-				console.log("piece not found");
-				console.log("looking for " + moveInArr);
-				console.log("looking in ");
-				console.log(fen);
+				return "err";
 			}
 	}
 	var newPos = moveInArr[moveInArr.length-2] + moveInArr[moveInArr.length-1];
 	return (oldPos + "-" + newPos);
 
 }
+
