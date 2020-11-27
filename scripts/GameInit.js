@@ -93,16 +93,15 @@ function setupUserInput()
   newButton.innerHTML = 'Submit';
   newButton.onclick = newMove;
 
+  var undoButton = document.createElement('button');
+  undoButton.setAttribute('id','undoButton');
+  undoButton.innerHTML = 'Undo';
+  undoButton.onclick = undo;
 
   //add new inputs to input div
   var inputDiv = document.getElementById('inputdiv');
   inputDiv.appendChild(instruction);
   inputDiv.appendChild(newInput);
-  inputDiv.appendChild(linebreak);
-
   inputDiv.appendChild(newButton);
-
-
-  //if side == black, get opp move
-
+  inputDiv.appendChild(undoButton);
 }

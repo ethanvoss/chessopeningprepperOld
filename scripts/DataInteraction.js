@@ -110,3 +110,17 @@ function makeMove(move)
 	board.move(move);
 	pieceMoves++;
 }
+
+function undo()
+{
+	if(pieceMoves > 1)
+	{
+		//undo possible
+		currentFen.pop();
+		currentFen.pop();
+		pieceMoves -= 2;
+
+		var newPos = fenToBoardFen(currentFen[pieceMoves]);
+		board.position(newPos,true);
+	}
+}

@@ -34,3 +34,48 @@ function stringToFen(fenIn)
 	fenOut.push(row);
 	return fenOut;
 }
+
+function fenToBoardFen(fen)
+{
+	var fenArr = fen.split('');
+	var fenOutArr = [];
+	var counter = 0;
+	var onEmpty = false;
+	for(var i in fenArr)
+		{
+			if(fenArr[i] == "0")
+				{
+					counter++;
+					onEmpty = true;
+				}
+			else
+				{
+					if(onEmpty)
+					{
+						fenOutArr.push(counter.toString());
+						counter = 0;
+						onEmpty = false;
+					}
+					fenOutArr.push(fenArr[i]);
+				}
+		}
+	var fenOut = "";
+	for(var i in fenOutArr) fenOut+= fenOutArr[i];
+	return flipFen(fenOut);
+}
+
+function flipFen(fen)
+{
+	var fenIn = fen.split('/');
+	var fenOut = "";
+	for(var i = fenIn.length - 1; i >= 0; i--)
+	{
+		var row = "";
+		if(i < fenIn.length - 1) row += "/";
+		row += fenIn[i];
+		fenOut += row;
+	}
+
+	return fenOut;
+
+}
