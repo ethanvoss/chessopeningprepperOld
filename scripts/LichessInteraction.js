@@ -1,7 +1,7 @@
 function fetchFromLichess(user, type)
 {
   console.log("Loading ");
-  const api = "http://lichess.org/api/games/user/";
+  const api = "https://lichess.org/api/games/user/";
   var perams = "";
   if(type != "all") { //if something other than "all" is selected, add game type to params
     perams = "?perfType=" + type;
