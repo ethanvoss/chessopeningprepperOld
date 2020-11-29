@@ -6,7 +6,7 @@ function fetchFromLichess(user, type)
   if(type != "all") { //if something other than "all" is selected, add game type to params
     perams = "?perfType=" + type;
   }
-  
+  console.log(api);
 
 
   fetch(api + user + perams).then(function(res) { //make request to lichess for the games
