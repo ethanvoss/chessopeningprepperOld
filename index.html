@@ -49,6 +49,7 @@
             
     </div>
     <script src="scripts/FenHandling.js"></script>
+    <script src="scripts/sleep.js"></script>
     <script> 
     //global vars
     var board = Chessboard('board');
@@ -57,6 +58,7 @@
     var pieceMoves = 0;
     var games = [];
     var oppMove;
+    var pgnMoves = [];
     class fenObj
       {
         constructor(fenIn)
@@ -80,17 +82,13 @@
     currentFen.push(baseFen.getFen());
 
     </script>
-    
+    <script src="scripts/UI.js"></script>
     <script src="scripts/LichessInteraction.js"></script>
-    
     <script src="scripts/MoveToFen.js"></script>
-    
     <script src="scripts/DataInteraction.js"></script>
-
     <script src="scripts/GameInit.js"></script>
     <script>
- //create function that turns my fen into one chessboard.js can use to set positions, add function that gets the most popular response that the opp faces on their move
-   //
+ //add function that gets the most popular response that the opp faces on their move, add limit option for how many games are pulled
     
 
       

@@ -10,16 +10,15 @@ function newMove()
 			makeMove(move);
 			input.value = "";
 
-			if(side == "black") moveOutput(oppMove, playerMove);
-
+			updatePgn(playerMove);
 			//get opp move
 			var findmove = findMove();
-
+			updatePgn(findmove["move"]);
 			var oMove = expandMove(currentFen[pieceMoves], findmove["move"],oppSide);
 			currentFen.push(moveToFen(currentFen[pieceMoves], oMove));
+
 			makeMove(oMove);
 
-			if(side == "white") moveOutput(playerMove, oppMove);
 			
 		}
 	else
@@ -32,21 +31,6 @@ function newMove()
 	//findMove(input.value);
 }
 
-function moveOutput(whiteMove, blackMove)
-{
-	var list = document.getElementById('moveList');
-	var listElement = document.createElement('li');
-
-
-	listElement.innerHTML = whiteMove + " " + blackMove;
-	list.appendChild(listElement);
-}
-
-function updateMoveDisplay(oMove)
-{
-	var display = document.getElementById('moveDisplay');
-	display.innerHTML = "their move is " + oMove["move"] + ". theyve played this " + oMove["timesPlayed"] + " times in this position."
-}
 
 function findMove()
 {
@@ -119,7 +103,8 @@ function undo()
 		currentFen.pop();
 		currentFen.pop();
 		pieceMoves -= 2;
-
+		findMove();
+		updatePgn("undo");
 		var newPos = fenToBoardFen(currentFen[pieceMoves]);
 		board.position(newPos,true);
 	}

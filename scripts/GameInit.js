@@ -58,6 +58,7 @@ function initializeGames(pgnArr)
       var oMove = expandMove(currentFen[0], findmove["move"],oppSide);
       currentFen.push(moveToFen(currentFen[0], oMove));
       makeMove(oMove);
+      updatePgn(findmove["move"]);
     }
 }
 
