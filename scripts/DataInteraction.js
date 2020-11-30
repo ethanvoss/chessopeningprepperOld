@@ -24,7 +24,7 @@ function newMove()
 					var oMove = expandMove(currentFen[pieceMoves], findmove["move"],oppSide);
 					currentFen.push(moveToFen(currentFen[pieceMoves], oMove));
 
-					makeMove(oMove);	
+					makeMove(oMove);
 				}
 			
 
@@ -90,23 +90,30 @@ function findMove()
 					playedMove = mov;
 				}
 		}
-	oppMove = playedMove;
-	console.log(playedMove);	
-	//returns most played move and times it was played
-
 	var out = 
 	{
 		"move" : playedMove,
 		"timesPlayed" : moveCount
 	}
-	updateMoveDisplay(out);
+
+	//handle opp move
+	if(displaySide == side)
+		{
+			oppMove = playedMove;
+			updateMoveDisplay(out);
+		}
 	return out;
+
 }
+
+
 
 function makeMove(move)
 {
 	board.move(move);
 	pieceMoves++;
+	updateFaced(findMove());
+	
 	if(displaySide == "white") displaySide = "black";
 	else displaySide = "white";
 	console.log(displaySide);

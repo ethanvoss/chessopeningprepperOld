@@ -34,7 +34,11 @@ function updatePgn(moveIn)
 
 }
 
-
+function updateFaced(incoming)
+{
+	var display = document.getElementById("faced")
+	display.innerHTML = "The most common response in their games is " + incoming["move"] + "which theyve faced " + incoming["timesPlayed"] + " times.";
+}
 
 function updateMoveDisplay(oMove)
 {

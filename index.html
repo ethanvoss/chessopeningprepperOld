@@ -11,6 +11,7 @@
 
       #board {float: left;}
       #pgn {margin-left: 400px;}
+      #suggest {float: right;}
     </style>
   </head>
   <body>
@@ -48,7 +49,11 @@
       </ol>
 
     </div>
-            
+        <div id="suggest">
+          <p id="faced"></p>
+          <p i="popular"></p>
+
+        </div>
     </div>
     <script src="scripts/FenHandling.js"></script>
     <script src="scripts/sleep.js"></script>
@@ -91,7 +96,7 @@
     <script src="scripts/DataInteraction.js"></script>
     <script src="scripts/GameInit.js"></script>
     <script>
- //add function that gets the most popular response that the opp faces on their move, add a settings menu maybe, maybe convert to a node server site so users can load pgns quicker if theyve used them recently, add handler for if there is no opponent move availible, add suggested moves from the oppening api, add position eval from lichess
+ //add a settings menu maybe, maybe convert to a node server site so users can load pgns quicker if theyve used them recently, add suggested moves from the oppening api, add position eval from lichess
     
 
       
