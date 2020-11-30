@@ -144,3 +144,17 @@ function undo()
 		board.position(newPos,true);
 	}
 }
+
+function openingFetch()
+{
+	var api = "https://explorer.lichess.ovh/master?variant=standard&fen=";
+	//api += "r1bqk1nr/pppp1ppp/2n5/2b1p3/2B1P3/5N2/PPPP1PPP/RNBQK2R";
+	api += fenToBoardFen(currentFen[pieceMoves]);
+	console.log(api);
+	console.log(api);
+	fetch(api).then(function(e){
+		return e.json();
+	}).then(function(data){
+		console.log(data);
+	}).catch(err => console.log(err));
+}
