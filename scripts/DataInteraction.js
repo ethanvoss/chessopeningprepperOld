@@ -13,11 +13,20 @@ function newMove()
 			updatePgn(playerMove);
 			//get opp move
 			var findmove = findMove();
-			updatePgn(findmove["move"]);
-			var oMove = expandMove(currentFen[pieceMoves], findmove["move"],oppSide);
-			currentFen.push(moveToFen(currentFen[pieceMoves], oMove));
+			if(findmove == "noGames")
+				{
+					var display = document.getElementById('moveDisplay');
+					display.innerHTML = "They have never reached this position in the loaded games.";
+				}
+			else
+				{
+					updatePgn(findmove["move"]);
+					var oMove = expandMove(currentFen[pieceMoves], findmove["move"],oppSide);
+					currentFen.push(moveToFen(currentFen[pieceMoves], oMove));
 
-			makeMove(oMove);
+					makeMove(oMove);	
+				}
+			
 
 			
 		}
@@ -45,6 +54,10 @@ function findMove()
 			pool.push(games[g]);
 		}
 	}
+	if(pool.length < 1)
+	{
+		return "noGames";
+	}
 	//find most common move
 	var movePool = {};
 	for(var i in pool)
@@ -65,6 +78,7 @@ function findMove()
 		            }
 	            if (!found) movePool[move] = 1;
 		}
+
 	var moveCount = 0;
 	var playedMove;
 	//find most played move
@@ -93,6 +107,9 @@ function makeMove(move)
 {
 	board.move(move);
 	pieceMoves++;
+	if(displaySide == "white") displaySide = "black";
+	else displaySide = "white";
+	console.log(displaySide);
 }
 
 function undo()
@@ -101,8 +118,19 @@ function undo()
 	{
 		//undo possible
 		currentFen.pop();
-		currentFen.pop();
-		pieceMoves -= 2;
+		pieceMoves -= 1;
+		if(displaySide == side)
+			{
+				console.log("same side");
+				currentFen.pop();
+				pieceMoves -= 1;	
+			}
+		else
+			{
+				if(displaySide == "white") displaySide = "black";
+				if(displaySide == "black") displaySide = "white";
+			}
+		
 		findMove();
 		updatePgn("undo");
 		var newPos = fenToBoardFen(currentFen[pieceMoves]);

@@ -2,6 +2,7 @@ document.getElementById('submit').addEventListener('click', function(){
 	var user = document.getElementById('input').value;
 	var type = document.getElementById('types').value;
 	side = document.getElementById('side').value;
+	var limit = document.getElementById('limit').value;
 	oppSide = "black";
 	if(side == "black") oppSide = "white";
 
@@ -16,7 +17,7 @@ document.getElementById('submit').addEventListener('click', function(){
 
     board = Chessboard('board', config);
 
-	fetchFromLichess(user,type);
+	fetchFromLichess(user,type,limit,oppSide);
 
 	//remove input elements
 	var inputdiv = document.getElementById('inputdiv');

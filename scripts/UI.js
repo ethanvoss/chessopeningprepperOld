@@ -3,7 +3,7 @@ function updatePgn(moveIn)
 	if(moveIn == "undo")
 		{
 			pgnMoves.pop();
-			pgnMoves.pop();
+			if(displaySide == side) pgnMoves.pop();
 		}
 	else
 		{
